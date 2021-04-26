@@ -1,2 +1,2 @@
-# Neverglow.github.io
+# neverglow.github.io
 Neverglow's website
