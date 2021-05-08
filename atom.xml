@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Neverglow1.github.io/</id>
     <title>Neverglow</title>
-    <updated>2021-05-07T06:30:01.384Z</updated>
+    <updated>2021-05-08T03:38:10.428Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Neverglow1.github.io/"/>
     <link rel="self" href="https://Neverglow1.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://Neverglow1.github.io/images/avatar.png</logo>
     <icon>https://Neverglow1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Neverglow</rights>
+    <entry>
+        <title type="html"><![CDATA[python实现快速排序]]></title>
+        <id>https://Neverglow1.github.io/post/python-shi-xian-kuai-su-pai-xu/</id>
+        <link href="https://Neverglow1.github.io/post/python-shi-xian-kuai-su-pai-xu/">
+        </link>
+        <updated>2021-05-08T03:34:56.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>快速排序是对冒泡排序的一种改进，由C. A. R. Hoare在1960年提出。它采用了“分治法”的策略来进行排序。</p>
+</blockquote>
+<p>快速排序基本思想：</p>
+<p>1、从数列中选取一个基准数p</p>
+<p>2、小于等于p的放到它的左边，大于p的放到它的右边</p>
+<p>3、对被分割开的左右两部分重复以上步骤，直到左右两部分中都只有一个元素</p>
+<p>算法实现：</p>
+<pre><code class="language-python">import random
+
+def quicksort(lists):
+    if len(lists) &lt; 2:
+        return lists        #左右两部分完成排序后结束递归
+    else:
+        pivot = lists[0]    #选择列表第一个数作为基准值
+        left = [i for i in lists[1:] if i &lt;= pivot]      #把小于等于基准值的数换到其左边
+        right = [j for j in lists[1:] if j &gt; pivot]      #把大于基准值的数换到其右边
+        return quicksort(left)+[pivot]+quicksort(right)  #返回排序完毕的列表
+
+if __name__==&quot;__main__&quot;:
+    lists= [2,5,4,1,6,7,4,9,1]
+    random.shuffle(lists)      #打乱列表，防止出现极端情况
+    print(lists)               #输出排序前列表
+    print(quicksort(lists))    #输出排序后列表
+</code></pre>
+<p>输出示例：</p>
+<pre><code class="language-python">[4, 7, 1, 5, 2, 9, 6, 1, 4]
+[1, 1, 2, 4, 4, 5, 6, 7, 9]
+</code></pre>
+<p>快速排序时间复杂度：</p>
+<p>最优情况：每一次的p都能恰好平分数组，此时时间复杂度为O(nlogn)</p>
+<p>最差情况：每一次的p都刚好是最大或最小的数，此时时间复杂度为 O(n^2)</p>
+<p>平均情况：时间复杂度为O(nlogn)</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[python实现多线程端口扫描器]]></title>
         <id>https://Neverglow1.github.io/post/python-shi-xian-duo-xian-cheng-duan-kou-sao-miao-qi/</id>
