@@ -1,11 +1,10 @@
 <html>
-
 <head>
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>友情链接 | Neverglow</title>
+<title>常见Web安全漏洞知识点梳理（持续更新） | Neverglow</title>
 
 <link rel="shortcut icon" href="https://Neverglow1.github.io//favicon.ico?v=1625545907311">
 
@@ -34,12 +33,11 @@
 <!--<script src="media/scripts/index.js"></script>-->
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
-
 <body>
 <div class="main gt-bg-theme-color-first">
-        <div class="main-content">
-            <style>
+    <style>
     /* 导航栏样式 */
     .navbar {
         position: relative;
@@ -200,41 +198,97 @@
         }
     }
 </script>
-            <div class="post-container">
-                <div class="post-detail">
-                    <article>
-                        <!-- <div class="post-content-wrapper"> -->
-                            <div class="post-content">
-                                <div class="friends-desc">
-                                    
-                                </div>
-                                <h3 id="linklist">友链列表</h3>
-                                
-                                    
-                                        <div class="friend-box">
-                                            <img class="friend-avatar" src="">
-                                            <div class="flink-info">
-                                                
-                                                        <a class="gt-c-content-color-first" href="adobie.top" target="_blank">adobie</a>
-                                                        
-                                                <br />
-                                                <div class="flink-info-desc gt-c-content-color-first">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                
-                            </div>
-                        <!-- </div> -->
-                    </article>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    常见Web安全漏洞知识点梳理（持续更新）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-07-06 ·
+                    </time>
+                    
                 </div>
-                
+                <div class="post-content">
+                    <h2 id="跨站脚本攻击xsscross-site-script">跨站脚本攻击（XSS,Cross Site Script）</h2>
+<p>XSS攻击，通常指黑客在网页中插入恶意脚本，从而用户在浏览网页时，控制用户浏览器的一种攻击方式。</p>
+<p>XSS根据效果不同可以分为：1、反射性XSS。2、存储型XSS（恶意脚本保存在服务器端）3、DOM型XSS（修改页面DOM节点）</p>
+<p>XSS危害：cookie劫持，通过javascript构造GET,POST请求，XSS钓鱼，识别用户浏览器，识别用户安装的软件，获取用户真实ip地址，XSS蠕虫</p>
+<p>XSS构造技巧：利用字符编码，绕过长度限制，使用不常用标签(例如<base>)，使用window.name</p>
+<p>XSS的防御：HttpOnly(cookie劫持问题)，输入检查(XSS Filter)，输出检查（变量输出到HTML页面时，把代码编码或转义），处理富文本（白名单），</p>
+<h2 id="跨站点请求伪造csrfcross-site-request-forgery">跨站点请求伪造（CSRF，Cross Site Request Forgery）</h2>
+<p>CSRF攻击是一种挟制用户在当前已登录（认证）的Web<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/5985445">应用程序</a>上执行非本意的操作的攻击方法。攻击成功本质原因：重要操作的参数都可以被攻击者猜测到</p>
+<p>攻击者伪造的请求能被服务器通过，是因为用户浏览器成功发送了Cookie</p>
+<p>浏览器的两种Cookie：”Session Cookie“(临时Cookie)，“Third-party Cookie”（本地Ckookie）</p>
+<p>P3P头（The Platform for Privacy Preferences）允许跨域访问隐私数据</p>
+<p>CSRF的防御：验证码,Referer Check（请求是否来自合法&quot;源&quot;），Anit CSRF Token（攻击者无法猜测出Token，构造出完整URL）</p>
+<h2 id="注入攻击">注入攻击</h2>
+<p>注入攻击的本质：用户输入数据当作代码执行。两个关键条件：1、用户能控制输入。2、程序要执行的代码，拼接了用户输入的数据</p>
+<p>SQL注入：盲注(页面是否变化)，Timing Attack</p>
+<p>数据库攻击技巧：命令执行，利用UDF（User-Defined Functions，用户自定义函数）执行命令。攻击存储过程。编码问题（基于字符集的注入攻击）。SQL Column Truncation</p>
+<p>SQL注入的防御：使用预编译语句（绑定变量），使用安全的存储过程（将SQL语句定义在数据库中，存储过程中也可能会存在注入问题），检查数据类型(限制输入)，使用安全函数,最小权限原则（避免Web应用使用高权限账号直接连接数据库）</p>
+<p>其他注入攻击：XML注入，代码注入，CRLF注入</p>
+<h2 id="文件上传漏洞">文件上传漏洞</h2>
+<p>文件上传漏洞，用户上传了一个可执行的脚本文件，并通过脚本文件获得了执行服务器端命令的能力。</p>
+<p>绕过文件上传检查：利用%00字符截断，伪造合法文件头（绕过检验文件头），Apache文件解析问题（从后往前解析），IIS文件解析问题（;字符截断文件名），PHP CGI路径解析问题（递归查询路径确认文件合法性）</p>
+<p>如何设计安全的文件上传功能：1、文件上传的目录设置为不可执行。2、判断文件类型（MIME Type 后缀检查）3、使用随机数改写文件名和文件路径（用户访问不到文件）4、单独设置文件服务器的域名（同源同域策略）</p>
+<h2 id="命令执行漏洞">命令执行漏洞</h2>
+<p>命令执行漏洞，服务器没有对执行的命令进行过滤，用户可以随意执行系统命令。</p>
+<p>漏洞危害：继承Web服务器程序的权限，去执行系统命令或读写文件。反弹shell。控制整个网站，甚至控制整个服务器。</p>
+<p>漏洞成因：1、没有对用户输入进行过滤或过滤不严（例如&amp;,&amp;&amp;,|,||等连接符）2、系统漏洞造成的命令执行。3、调用的第三方组件存在代码执行漏洞</p>
+<p>常见危险函数</p>
+<p>PHP相关：eval()，assert()，preg_replace，call_user_func()，call_user_func_array()，create_function，array_map()</p>
+<p>系统命令执行相关：system()，passthru()，exec()，pcntl_exec()，shell_exec()，popen()，proc_open()，`(反单引号)，ob_start()</p>
+<p>防御措施：1、在PHP下禁用高危系统函数。2、参数的值尽量使用引号包括，并在拼接前调用addslashes进行转义。3、不执行外部的应用程序或命令。4、使用escapeshellarg函数处理相关参数。5、使用safe_mode_exec_dir指定可执行的文件路径</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Neverglow1.github.io/post/python-shi-xian-kuai-su-pai-xu/" class="post-title gt-a-link">
+                    python实现快速排序
+                </a>
             </div>
+        
+
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
 
 
+	<div id="vcomments"></div>
 
-            <div class="site-footer gt-c-content-color-first">
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: false,
+		placeholder: 'Just Go Go',
+		visitor: false,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">make more time</div>
     <div class="social-container">
         
@@ -264,8 +318,7 @@
   hljs.initHighlightingOnLoad()
 </script>
 
-        </div>
     </div>
+</div>
 </body>
-
 </html>
